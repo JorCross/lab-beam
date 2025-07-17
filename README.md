@@ -49,3 +49,5 @@ java -jar target/beam-lab-1.0-SNAPSHOT.jar --rutaSource=source/source_1.csv --pa
 ```
 
 Consider increasing memory with parameters like `-Xmx8G` if processing a large amount of data.
+
+The "captura_uso_recursos" folder contains evidence of CPU usage with different file sizes.
