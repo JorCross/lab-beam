@@ -1,46 +1,51 @@
 # Apache Beam
 
-Este proyecto implementa un pipeline de **Apache Beam en Java** que procesa archivos `.csv` distribuidos en carpetas por fecha, y elimina líneas cuyo contenido coincida con un conjunto de claves provenientes de un archivo source.
+This project implements an **Apache Beam pipeline in Java** that processes `.csv` files distributed in date-based folders and removes lines whose content matches a set of keys from a source file.
 
-## Proceso
+## Process
 
-- Lee un archivo de claves source (nombre parametrizable), cada línea representa una clave a eliminar.
-- Busca archivos `.csv` según un patrón (por ejemplo, `destination/**/file.csv`).
-- Recorre línea por línea cada archivo destino, y **elimina las líneas que coincidan exactamente con alguna clave del source**.
-- **Preserva la cantidad de líneas**, escribiendo una línea vacía en lugar de eliminar la línea.
-- Genera un archivo temporal, y luego reemplaza el archivo original por este.
+- Reads a source file of keys (parameterizable filename), where each line represents a key to be removed.
+- Searches for `.csv` files using a pattern (e.g., `destination/**/file.csv`).
+- Iterates line by line through each destination file and **removes lines that exactly match any key from the source file**.
+- **Preserves the number of lines** by writing an empty line instead of deleting it.
+- Generates a temporary file and then replaces the original file with it.
 
-## Estructura del proyecto
+## Project Structure
+
 ```text
 com.lab/
-├── MainPipeline.java # Clase principal del pipeline
-├── LabOptions.java # Opciones personalizadas para el pipeline
-├── ClaveUtils.java # Carga el archivo de claves como side input
-└── ArchivoUtils.java # Funciones para borrar y renombrar archivos
+├── MainPipeline.java # Main pipeline class
+├── LabOptions.java # Custom pipeline options
+├── ClaveUtils.java # Loads the key file as side input
+└── ArchivoUtils.java # Functions for deleting and renaming files
 ```
 
-## Ejemplo de estructura esperada
+## Expected Directory Structure
 ```text
 source/
-└── source.csv         # Archivo con claves (una por línea)
+└── source.csv # File with keys (one per line)
 ```
+
 ```text
 destination/
 ├── 2025-07-10/
-│   └── name.csv
+│ └── name.csv
 ├── 2025-07-11/
-│   └── name.csv
+│ └── name.csv
 └── ...
 ```
-## Como se ejecuta
+
+## How to Run
 ```text
 java -jar target/beam-lab-1.0-SNAPSHOT.jar --rutaSource=<source_file> --patternDestination=<destination_path>
 ```
---rutaSource=<source_file> corresponde al archivo que contiene las claves.
---patternDestination=<destination_path> corresponde a la ruta donde se encuentran los archivos destino. El patrón de los archivos es parametrizable así que puede cambiarse.
 
-Ejemplo de uso:
+- `--rutaSource=<source_file>` refers to the file containing the keys.
+- `--patternDestination=<destination_path>` refers to the path where the destination files are located. The file pattern is parameterizable and can be adjusted.
+
+### Example
 ```text
 java -jar target/beam-lab-1.0-SNAPSHOT.jar --rutaSource=source/source_1.csv --patternDestination=destination/*/*.csv
 ```
-Considerar el uso de aumento de memoria con parámetros como -Xmx8G si la cantidad de datos es muy grande.
+
+Consider increasing memory with parameters like `-Xmx8G` if processing a large amount of data.
