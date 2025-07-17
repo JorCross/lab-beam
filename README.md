@@ -33,12 +33,14 @@ destination/
 └── ...
 ```
 ## Como se ejecuta
+```text
 java -jar target/beam-lab-1.0-SNAPSHOT.jar --rutaSource=<source_file> --patternDestination=<destination_path>
-
+```
 --rutaSource=<source_file> corresponde al archivo que contiene las claves.
 --patternDestination=<destination_path> corresponde a la ruta donde se encuentran los archivos destino. El patrón de los archivos es parametrizable así que puede cambiarse.
 
 Ejemplo de uso:
+```text
 java -jar target/beam-lab-1.0-SNAPSHOT.jar --rutaSource=source/source_1.csv --patternDestination=destination/*/*.csv
-
+```
 Considerar el uso de aumento de memoria con parámetros como -Xmx8G si la cantidad de datos es muy grande.
