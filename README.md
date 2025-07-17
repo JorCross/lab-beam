@@ -11,23 +11,27 @@ Este proyecto implementa un pipeline de **Apache Beam en Java** que procesa arch
 - Genera un archivo temporal, y luego reemplaza el archivo original por este.
 
 ## Estructura del proyecto
+```text
 com.lab/
 ├── MainPipeline.java # Clase principal del pipeline
 ├── LabOptions.java # Opciones personalizadas para el pipeline
 ├── ClaveUtils.java # Carga el archivo de claves como side input
 └── ArchivoUtils.java # Funciones para borrar y renombrar archivos
+```
 
 ## Ejemplo de estructura esperada
+```text
 source/
 └── source.csv         # Archivo con claves (una por línea)
-
+```
+```text
 destination/
 ├── 2025-07-10/
 │   └── name.csv
 ├── 2025-07-11/
 │   └── name.csv
 └── ...
-
+```
 ## Como se ejecuta
 java -jar target/beam-lab-1.0-SNAPSHOT.jar --rutaSource=<source_file> --patternDestination=<destination_path>
 
